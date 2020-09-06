@@ -21,11 +21,12 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    label = models.CharField(max_length=500, blank=True, null=True)
     option1 = models.CharField(max_length=500,blank=True, null=True)
     option2 = models.CharField(max_length=500,blank=True, null=True)
     option3 = models.CharField(max_length=500,blank=True, null=True)
     option4 = models.CharField(max_length=500,blank=True, null=True)
-    label = models.CharField(max_length=500,blank=True, null=True)
+
     answer = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):

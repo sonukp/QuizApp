@@ -1,63 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function()
-    {
-        $("#but1").click(function()
-        {
-            $(".rb").show();
-            $(".rb").attr("disabled",true);
-        });
-    }
-    function getanswers()
-    {
-        document.getElementById(UserAnswers).innerHTML="";
-        var e=document.getElementsByName("input");
-        for(i=0;i<=e.length;i++)
-        {
-            if(e[i].type=="radio")
-            {
-                if(e[i].checked)
-                {
-                    document.getElementById(UserAnswers).innerHTML+="Q "+e[i].name+" the Answer is :"+e[i].value+"<br/>";
-                 }
-            }
-        }
-    }
-</script>
-<div>
-    Please select on answer for questions:
-    <hr>
-    {% for q in ques %}
-
-        <table>
-            <tr>
-                <td> {{ forloop.counter }}. {{ q.label }}</td>
-            </tr>
-            <tr>
-                <td><input type="radio" id="option1" class="rb" name="{{ forloop.counter }}" value="{{ q.option1}}">{{q.option1}}</td>
-            </tr>
-            <tr>
-                <td><input type="radio" id="option2" class="rb" name="{{ forloop.counter }}" value="{{ q.option2}}">{{q.option2}}</td>
-            </tr>
-            <tr>
-                <td><input type="radio" id="option3" class="rb" name="{{ forloop.counter }}"value="{{ q.option3}}">{{q.option3}}</td>
-            </tr>
-            <tr>
-                <td><input type="radio" id="option4" class="rb" name="{{ forloop.counter }}"value="{{ q.option4}}">{{q.option4}}</td>
-            </tr>
-            <tr>
-                <td><label  id="correctans" class="rb" style="display: none; color:green;">{{q.answer}}</td>
-            </tr>
-
-        </table>
+<form action= '/result' method = "POST" >
+    {% for question in ques %}
+        <div class = 'question'>Q{{forloop.counter}} {{ question.label }} </div><br>
+        <div id= "choices" class='select'>
+            <input type = "radio" name="{{question.id}}" value="{{question.option1}}">{{question.option1}}<br>
+            <input type = "radio" name="{{question.id}}" value="{{question.option2}}">{{question.option2}}<br>
+            <input type = "radio" name="{{question.id}}" value="{{question.option3}}">{{question.option3}}<br>
+            <input type = "radio" name="{{question.id}}" value="{{question.option4}}">{{question.option4}}<br>
+        </div>
+        <br>
     {% endfor %}
-    <hr/>
-    <input type="submit" value="Submit" id="but1" onclick="getanswers();"/>
-    <b id="UserAnswers"></b>
-</div>
+<div style="text-align:center"> <input style="padding: 10px 35px;font-size:120%;cursor: pointer;" type="submit" class="submit" id="submit" value="Submit"/></div>
+    {% csrf_token %}
+</form>
 
 
 {% endblock %}
