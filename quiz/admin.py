@@ -17,7 +17,7 @@ class QuizUseAdmin(admin.ModelAdmin):
         writer = csv.writer(f)
         writer.writerow(['user', 'quiz', 'score'])
         for s in queryset:
-            writer.writerow([s.user.username, s.quiz.name, s.score])
+            writer.writerow([s.user.username, s.quiz, s.score])
 
         f.seek(0)
         response = HttpResponse(f, content_type='text/csv')
