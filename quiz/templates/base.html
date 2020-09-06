@@ -1,0 +1,25 @@
+{% load static %}
+<html>
+<head>
+    <title>Quiz Portal</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        {% if user.is_authenticated %}
+            <p >Hello {{ user.username }} <a href="{% url 'logout' %}">Log out</a></p>
+        {% else %}
+            <a href="{% url 'login' %}"></a>
+        {% endif %}
+        <h3><a href="/">Quiz Portal</a></h3>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
