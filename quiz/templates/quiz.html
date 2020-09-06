@@ -2,7 +2,10 @@
 
 {% block content %}
 
-    <p>Please Select the Quiz Option</p>
+
+<br>
+<br>
+<p><i><b>Please Select the Quiz Option :</b></i></p>
     {% for q in quiz %}
         <div class="post">
             <h2><a href="{% url 'quiz_page' quizname=q.name %}">{{ q.name }}</a></h2>

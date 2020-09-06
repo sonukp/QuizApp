@@ -33,18 +33,9 @@ class Question(models.Model):
         return self.label
 
 
-# class Option(models.Model):
-#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-#     text = models.CharField(max_length=1000)
-#     is_correct = models.BooleanField(default=False)
-#
-#     def __str__(self):
-#         return self.text
-
-
 class QuizUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.CharField(max_length=500, blank=True, null=True)
     score = models.IntegerField(default=0)
 
     def __str__(self):

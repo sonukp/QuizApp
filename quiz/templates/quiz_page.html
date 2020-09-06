@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<label name="{{quiz.name}}">Quiz for {{quiz.name}}</label>
 <form action= '/result' method = "POST" >
     {% for question in ques %}
         <div class = 'question'>Q{{forloop.counter}} {{ question.label }} </div><br>
